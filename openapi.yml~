@@ -46,7 +46,6 @@ info:
     
 servers:
   - url: 'https://tickapi1.herokuapp.com'
-  - url: 'http://localhost:3000'
 paths: 
   /event:
     get:
