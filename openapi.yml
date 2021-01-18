@@ -46,7 +46,7 @@ info:
     
 servers:
   - url: 'https://tickapi1.herokuapp.com'
-  - url: 'http://localhost:3000'
+  - url: 'http://localhost:3000'  
 paths: 
   /event:
     get:
@@ -814,7 +814,7 @@ paths:
       description: ""
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
                 $ref: '#/components/schemas/chart'
       responses:
@@ -838,7 +838,6 @@ paths:
                     properties:
                       message:
                         type: string
-                        enum: ["Missing  property"]
                         example: "Key (id)=(21) already exists."
     put:
       tags:
@@ -866,9 +865,8 @@ paths:
                     properties:
                       message:
                         type: string
-                        enum: ["Missing  property"]
                         example: "Key (id)=(21) already exists."
-  /chart{id}:
+  /chart/{id}:
     get:
       tags: 
         - charts
@@ -937,6 +935,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/eventreport'
+        400:
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                title: "error"
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example:  [
+    {
+      "message": "\"ev\" is required",
+      "path": [
+        "ev"
+      ],
+      "type": "any.required",
+      "context": {
+        "label": "ev",
+        "key": "ev"
+      }
+    }
+  ]
         404:
           description: "Not found"
           content:
